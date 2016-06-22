@@ -18,17 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="112dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/contact_list">
-        </TextView>
-
         <ListView
-            android:id="@+id/contactList"
+            android:id="@+id/lstNames"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </ListView>
+            android:layout_height="match_parent" />
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar_layout"
