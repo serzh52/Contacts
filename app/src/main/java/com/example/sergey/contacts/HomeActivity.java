@@ -1,7 +1,9 @@
 package com.example.sergey.contacts;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -9,8 +11,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.sergey.contacts.adapter.TabAdapter;
+
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
@@ -23,6 +29,20 @@ public class HomeActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         setUi();
+
+        ListView contactsList = (ListView) findViewById(R.id.contactList);
+        ArrayList<String> contacts = new ArrayList<String>();
+
+        Cursor contactsCursor = getContentResolver()
+                .query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+        while (contactsCursor.moveToNext()) {
+            String contact = contactsCursor.getString(
+                    contactsCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY));
+            contacts.add(contact);
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, contacts);
+        contactsList.setAdapter(adapter);
     }
 
     private void setUi() {

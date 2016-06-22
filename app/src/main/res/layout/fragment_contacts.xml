@@ -12,4 +12,5 @@
         android:textSize="35sp"
         android:text="No Contacts" />
 
+
 </FrameLayout>
